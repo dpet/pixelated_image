@@ -16,6 +16,7 @@ export function generateElement(canvas: HTMLCanvasElement, ctx: CanvasRenderingC
 
 function displayMap(imgArray: number[][][]){
     const imgContainer = document.getElementById('img-grid-container')!
+    imgContainer.innerHTML = ''
     imgContainer.style.grid = `repeat(${imgArray.length}, 1fr) / repeat(${imgArray[0].length}, 1fr)`
     imgContainer.style.aspectRatio = `${imgArray[0].length} / ${imgArray.length}`
 

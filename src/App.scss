@@ -27,7 +27,7 @@ canvas{
   display: inline-block;
   margin-bottom: 20px;
   margin-right: 20px;
-  padding: 10px 20px;
+  padding: 6px 20px;
   background: #88f;
   border-radius: 6px;
   outline: none;
@@ -39,19 +39,41 @@ canvas{
   }
 }
 
-.generateButton{
-  padding: 10px 20px;
-  background: #88f;
+button{
+  padding: 6px 20px;
   border-radius: 6px;
   outline: none;
-  border: 2px solid #66f;
   color: white;
   font-size: 16px;
   cursor: pointer;
+  margin-right: 10px;
 
   &:disabled{
     background: grey;
     border: 2px solid #555;
+  }
+}
+
+.generateButton{
+  background: #88f;
+  border: 2px solid #66f;
+}
+
+.modeButton{
+  background: #74af96;
+  border: 2px solid #003b32;
+
+  &.modeSelected{
+    background: #005e3a;
+  }
+}
+
+.optionButton{
+  background: #6ca5b6;
+  border: 2px solid #002e3b;
+
+  &.optionSelected{
+    background: #00485e;
   }
 }
 
@@ -62,3 +84,14 @@ canvas{
   border-radius: 10px;
   border: 1px solid red;
 }
+
+.demoImages{
+  margin-bottom: 20px;
+
+  .demoImage{
+    width: 160px;
+    image-rendering: pixelated;
+    margin-right: 10px;
+  }
+}
+

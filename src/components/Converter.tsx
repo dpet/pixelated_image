@@ -9,6 +9,15 @@ export default function Converter(){
     let elementRef = useRef<HTMLDivElement>(null)
     let [ imageFile, setImageFile ] = useState<File | null>(null)
     let [ image, setImage ] = useState<HTMLImageElement | null>(null)
+    let [ mode, setMode ] = useState("White")
+    let [ animateOption, setAnimateOption ] = useState(true)
+    let [ svgOption, setSvgOption ] = useState(false)
+
+    let modeDescriptions: {[key: string]: string} = {
+        White: 'nodes are generated from non-white pixels. White pixels are left empty.',
+        Transparent: 'nodes are generated from non-transparent pixels. Transparent pixels are left empty.',
+        Color: 'nodes get their background styled with the pixel color'
+    }
 
     useEffect(() => {
         (async () => {
@@ -22,10 +31,29 @@ export default function Converter(){
     }, [imageFile])
 
     return <div>
+        <div className="mb-6">Try these demos</div>
         <div className="demoImages">
             <img className="demoImage" src="./public/world_white_50.png" onClick={() => addDemoImage("./public/world_white_50.png")}/>
+            <img className="demoImage" src="./public/438_100.png" onClick={() => addDemoImage("./public/438_100.png")}/>
         </div>
-        {image && <div className="">This image will generate {image.width * image.height} nodes.</div>}
+
+        <div className="mb-6">Mode: {mode} - {modeDescriptions[mode]}</div>
+        <div className="modes mb-20">
+            <button className={`modeButton ${mode == 'White' ? 'modeSelected' : ''}`} onClick={() => setMode("White")}>White</button>
+            <button className={`modeButton ${mode == 'Transparent' ? 'modeSelected' : ''}`} onClick={() => setMode("Transparent")}>Transparent</button>
+            <button className={`modeButton ${mode == 'Color' ? 'modeSelected' : ''}`} onClick={() => setMode("Color")}>Color</button>
+        </div>
+
+        <div className="mb-6">Options</div>
+        <div className="modes mb-6">
+            <button className={`optionButton ${animateOption ? 'optionSelected' : ''}`} onClick={() => setAnimateOption(!animateOption)}>Animate</button>
+            <button className={`optionButton optionSelected`} onClick={() => setSvgOption(!svgOption)}>{svgOption ? 'SVG' : 'Divs'}</button>
+        </div>
+        {animateOption && <div className="mb-6">Animate: Animates the demo and adds animation JS and CSS to the output</div>}
+        {svgOption && <div className="mb-6">SVG: output will be an svg</div>}
+        {!svgOption && <div className="mb-6">Divs: output will be divs arranged with CSS Grid</div>}
+
+        {image && <div>This image is {image.width} by {image.height} pixels and will generate {image.width * image.height} nodes.</div>}
         {checkPixels() && <div className="warning">This image has too many pixels.</div>}
         <canvas width="0" height="0" ref={canvasRef}></canvas><br />
 
