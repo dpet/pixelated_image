@@ -1,7 +1,7 @@
 
 #img-grid-container{
     display: grid;
-    width: 1400px;
+    width: 100%;
     background: #111;
     padding: 20px;
     margin: auto;
@@ -9,7 +9,7 @@
 
 .img-grid-item{
     border: 1px solid black;
-    margin: 4px;
+    margin: 2px;
     border-radius: 50%;
     background: linear-gradient(-200deg,#222 3%,#080808);
     box-shadow: -1px -1px 2px #080808,1px 1px 2px #222;

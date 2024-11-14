@@ -1,6 +1,64 @@
 
+canvas{
+  width: 100%;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  image-rendering: pixelated;
+}
+
 .container{
   width: 1000px;
   max-width: 100%;
   margin: 50px auto;
+}
+
+.title{
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 30px;
+}
+
+.description{
+  font-size: 20px;
+  margin-bottom: 20px;;
+}
+
+.imageInputLabel{
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  padding: 10px 20px;
+  background: #88f;
+  border-radius: 6px;
+  outline: none;
+  border: 2px solid #66f;
+  cursor: pointer;
+
+  .imageInput{
+    display: none;
+  }
+}
+
+.generateButton{
+  padding: 10px 20px;
+  background: #88f;
+  border-radius: 6px;
+  outline: none;
+  border: 2px solid #66f;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:disabled{
+    background: grey;
+    border: 2px solid #555;
+  }
+}
+
+.warning{
+  padding: 10px 20px;
+  margin-top: 6px;
+  background: #f44;
+  border-radius: 10px;
+  border: 1px solid red;
 }
