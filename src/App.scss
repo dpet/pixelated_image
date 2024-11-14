@@ -26,7 +26,7 @@ canvas{
 .imageInputLabel{
   display: inline-block;
   margin-bottom: 20px;
-  margin-right: 20px;
+  margin-right: 10px;
   padding: 6px 20px;
   background: #88f;
   border-radius: 6px;
@@ -55,25 +55,16 @@ button{
 }
 
 .generateButton{
-  background: #88f;
-  border: 2px solid #66f;
+  background: #00c04d;
+  border: 2px solid #00581a;
 }
 
 .modeButton{
-  background: #74af96;
-  border: 2px solid #003b32;
+  background: #6e6e6e;
+  border: 2px solid #363636;
 
   &.modeSelected{
-    background: hsl(157, 100%, 18%);
-  }
-}
-
-.optionButton{
-  background: #6ca5b6;
-  border: 2px solid #002e3b;
-
-  &.optionSelected{
-    background: #00485e;
+    background: #88f;
   }
 }
 
@@ -92,6 +83,7 @@ button{
     height: 100px;
     image-rendering: pixelated;
     margin-right: 10px;
+    cursor: pointer;
   }
 }
 

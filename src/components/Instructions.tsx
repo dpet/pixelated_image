@@ -4,11 +4,11 @@ export default function Instructions({ element }: {element: HTMLDivElement}){
     let [ open, setOpen ] = useState(false)
 
     return <div className="instructions">
-        <div className="toggle" onClick={() => setOpen(!open)}>Instructions</div>
+        <div className="toggle" onClick={() => setOpen(!open)}>Code</div>
         {open && <div>
             <div className="content">
                 <h3>Instructions</h3>
-                <p>Copy this code to use the graphic. </p>
+                <p>Copy this code to use the graphic. Javascipt is just for the animation and is optional. The idea is to allow the divs to be styled however you want, this is just a demo. I plan to also allow for outputting absolute positioned divs which might make it easier to animate or morph from one image to another and a svg option for better performance. I tried to animate all the divs using anime.js but the performance was too low.</p>
             </div>
 
             <div className="content">
