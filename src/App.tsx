@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import Converter from './components/Converter.tsx';
 
 function App() {

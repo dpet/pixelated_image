@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { generateElement } from '../assets/elementGenerator.ts';
+import '../assets/style/element.scss';
 
 export default function Converter(){
     let canvasRef = useRef<HTMLCanvasElement>(null)

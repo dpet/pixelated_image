@@ -1,5 +1,4 @@
 export function generateElement(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D){
-    alert()
 
     let imgArray: number[][][] = []
     const pixelData = ctx.getImageData(0, 0, canvas.width, canvas.height)
