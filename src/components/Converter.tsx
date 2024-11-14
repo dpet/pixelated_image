@@ -7,17 +7,22 @@ import '../assets/style/instructions.scss';
 export default function Converter(){
     let canvasRef = useRef<HTMLCanvasElement>(null)
     let elementRef = useRef<HTMLDivElement>(null)
+    let intervalRef = useRef<number>(0);
     let [ imageFile, setImageFile ] = useState<File | null>(null)
     let [ image, setImage ] = useState<HTMLImageElement | null>(null)
-    let [ mode, setMode ] = useState("White")
-    let [ animateOption, setAnimateOption ] = useState(true)
-    let [ svgOption, setSvgOption ] = useState(false)
+    let [ mode, setMode ] = useState("Monotone")
 
     let modeDescriptions: {[key: string]: string} = {
-        White: 'nodes are generated from non-white pixels. White pixels are left empty.',
-        Transparent: 'nodes are generated from non-transparent pixels. Transparent pixels are left empty.',
-        Color: 'nodes get their background styled with the pixel color'
+        Monotone: 'nodes are generated from non-white and non-transparent pixels. White and transparent pixels are left empty.',
+        Color: 'nodes get their background styled with the pixel color. Transparent pixels are left empty.'
     }
+
+    useEffect(() => {
+        (async () => {
+            await addDemoImage("./public/world_white_50.png")
+            processImage()
+        })()
+    }, [])
 
     useEffect(() => {
         (async () => {
@@ -31,31 +36,21 @@ export default function Converter(){
     }, [imageFile])
 
     return <div>
+        <div id="img-grid-container" ref={elementRef}></div>
+
         <div className="mb-6">Try these demos</div>
         <div className="demoImages">
             <img className="demoImage" src="./public/world_white_50.png" onClick={() => addDemoImage("./public/world_white_50.png")}/>
-            <img className="demoImage" src="./public/438_100.png" onClick={() => addDemoImage("./public/438_100.png")}/>
+            <img className="demoImage" src="./public/hello.png" onClick={() => addDemoImage("./public/hello.png")}/>
+            <img className="demoImage" src="./public/lotr.png" onClick={() => addDemoImage("./public/lotr.png")}/>
+            <img className="demoImage" src="./public/hill.png" onClick={() => addDemoImage("./public/hill.png")}/>
         </div>
 
         <div className="mb-6">Mode: {mode} - {modeDescriptions[mode]}</div>
         <div className="modes mb-20">
-            <button className={`modeButton ${mode == 'White' ? 'modeSelected' : ''}`} onClick={() => setMode("White")}>White</button>
-            <button className={`modeButton ${mode == 'Transparent' ? 'modeSelected' : ''}`} onClick={() => setMode("Transparent")}>Transparent</button>
+            <button className={`modeButton ${mode == 'Monotone' ? 'modeSelected' : ''}`} onClick={() => setMode("Monotone")}>Monotone</button>
             <button className={`modeButton ${mode == 'Color' ? 'modeSelected' : ''}`} onClick={() => setMode("Color")}>Color</button>
         </div>
-
-        <div className="mb-6">Options</div>
-        <div className="modes mb-6">
-            <button className={`optionButton ${animateOption ? 'optionSelected' : ''}`} onClick={() => setAnimateOption(!animateOption)}>Animate</button>
-            <button className={`optionButton optionSelected`} onClick={() => setSvgOption(!svgOption)}>{svgOption ? 'SVG' : 'Divs'}</button>
-        </div>
-        {animateOption && <div className="mb-6">Animate: Animates the demo and adds animation JS and CSS to the output</div>}
-        {svgOption && <div className="mb-6">SVG: output will be an svg</div>}
-        {!svgOption && <div className="mb-6">Divs: output will be divs arranged with CSS Grid</div>}
-
-        {image && <div>This image is {image.width} by {image.height} pixels and will generate {image.width * image.height} nodes.</div>}
-        {checkPixels() && <div className="warning">This image has too many pixels.</div>}
-        <canvas width="0" height="0" ref={canvasRef}></canvas><br />
 
         <label className="imageInputLabel">
             Upload image
@@ -64,18 +59,28 @@ export default function Converter(){
 
         <button className="generateButton" onClick={processImage} disabled={checkPixels()}>Process</button>
         <Instructions element={elementRef.current!} />
-        <div id="img-grid-container" ref={elementRef}></div>
+        
+        {image && <div>This image is {image.width} by {image.height} pixels and will generate up to {image.width * image.height} nodes.</div>}
+        {checkPixels() && <div className="warning">This image has too many pixels.</div>}
+        <canvas width="0" height="0" ref={canvasRef}></canvas><br />
     </div>
 
     async function processImage(){
         const canvas: HTMLCanvasElement = canvasRef.current!
         const ctx = canvas.getContext("2d")!;
-        generateElement(canvas, ctx)
+        generateElement(canvas, ctx, mode)
+
+        clearInterval(intervalRef.current)
+        intervalRef.current = setInterval(() => {
+            let elem = elementRef.current?.children[Math.floor(Math.random() * elementRef.current?.children.length)]
+            elem?.classList.add('highlight')
+            setTimeout(() => {elem?.classList.remove('highlight')}, 4000)
+        }, 1000)
     }
 
     function checkPixels(){
         if (!image) return false
-        return image.width * image.height > 20000
+        return image.width * image.height > 50000
     }
 
     async function addDemoImage(url: string){

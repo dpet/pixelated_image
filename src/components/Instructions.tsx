@@ -7,6 +7,11 @@ export default function Instructions({ element }: {element: HTMLDivElement}){
         <div className="toggle" onClick={() => setOpen(!open)}>Instructions</div>
         {open && <div>
             <div className="content">
+                <h3>Instructions</h3>
+                <p>Copy this code to use the graphic. </p>
+            </div>
+
+            <div className="content">
                 <h3>Starter CSS</h3>
                 <pre><code>
 {`#img-grid-container{
@@ -23,7 +28,25 @@ export default function Instructions({ element }: {element: HTMLDivElement}){
     border-radius: 50%;
     background: linear-gradient(-200deg,#222 3%,#080808);
     box-shadow: -1px -1px 2px #080808,1px 1px 2px #222;
+    transition: box-shadow 4s ease-in-out, transform 4s ease-in-out;
+}
+
+.img-grid-item.highlight{
+    transform: scale(2);
+    box-shadow: 5px 5px 2px #0004, 0px 0px 2px #3330;
 }`}
+                </code></pre>
+            </div>
+
+            <div className="content">
+                <h3>Starter Js</h3>
+                <pre><code>
+{`setInterval(() => {
+    let elemParent = document.getElementById('#img-grid-container')
+    let elem = elemParent?.children[Math.floor(Math.random() * elemParent?.children.length)]
+    elem?.classList.add('highlight')
+    setTimeout(() => {elem?.classList.remove('highlight')}, 4000)
+}, 1000)`}
                 </code></pre>
             </div>
 

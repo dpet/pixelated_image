@@ -3,14 +3,29 @@
     display: grid;
     width: 100%;
     background: #111;
-    padding: 20px;
-    margin: auto;
+    margin: 40px auto;
 }
 
 .img-grid-item{
+    transition: box-shadow 4s ease-in-out, transform 4s ease-in-out;
+
+    &.highlight, &:hover{
+        transform: scale(2);
+        box-shadow: 5px 5px 2px #0004, 0px 0px 2px #3330;
+    }
+
+    
+}
+
+.Monotone{
     border: 1px solid black;
     margin: 2px;
     border-radius: 50%;
     background: linear-gradient(-200deg,#222 3%,#080808);
     box-shadow: -1px -1px 2px #080808,1px 1px 2px #222;
+}
+
+.Color{
+    margin: 1px;
+    border-radius: 50%;
 }

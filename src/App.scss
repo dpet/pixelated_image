@@ -2,7 +2,7 @@
 canvas{
   width: 100%;
   margin-top: 6px;
-  margin-bottom: 6px;
+  margin-bottom: 100px;
   image-rendering: pixelated;
 }
 
@@ -20,7 +20,7 @@ canvas{
 
 .description{
   font-size: 20px;
-  margin-bottom: 20px;;
+  margin-bottom: 40px;
 }
 
 .imageInputLabel{
@@ -64,7 +64,7 @@ button{
   border: 2px solid #003b32;
 
   &.modeSelected{
-    background: #005e3a;
+    background: hsl(157, 100%, 18%);
   }
 }
 
@@ -89,7 +89,7 @@ button{
   margin-bottom: 20px;
 
   .demoImage{
-    width: 160px;
+    height: 100px;
     image-rendering: pixelated;
     margin-right: 10px;
   }
